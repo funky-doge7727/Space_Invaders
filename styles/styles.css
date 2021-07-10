@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    background-color: black;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+}
+
+#playWindow {
+    position: relative;
+    display: flex;
+    justify-content: center 
+}
+
+#playArea {
+    position: relative;
+    width: 720px;
+    height: 576px;
+    border: solid green 2px;
+    overflow: hidden;
+}
+
+#scoreContainer {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 1.5em;
+    text-align: right;
+    z-index: 30;
+}
+
+.score {
+    padding: 10px;
+}
+
+.sprite {
+    background-image: url("../assets/playerShip1_blue.png");
+    width: 49px;
+    height: 37px;
+    top: 400px;
+    left: 360px;
+    position: absolute;
+    z-index: 10
+
+}
