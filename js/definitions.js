@@ -1,7 +1,8 @@
 'use strict'
 
 const ImageFiles = [
-    'playerShip1_blue'
+    'playerShip1_blue',
+    'Lasers/laserBlue02_s'
 ]
 
 const GameSettings = {
@@ -12,6 +13,12 @@ const GameSettings = {
         down: 40,
         space: 32
     },
+    targetFPS: 1000 / 60,
+
+    bulletSpeed: 700 / 1000, // bullet speed traverse the map vertically upwards at 0.7s
+    bulletLife: 4000,  // bullet will traverse only for 4 seconds, then flies out of the boundaries and not exist (i.e. no life)
+    bulletFireRate: 2000, // bullet will fire every 2 seconds from the player
+
     playAreaWidth: 720,
     playAreaHeight: 576,
     playAreaDiv: '#playArea',
@@ -31,6 +38,10 @@ const GameSettings = {
 
 let GameManager = {
     assets: {},
-    player: undefined
+    player: undefined,
+    bullet: undefined,
+    lastUpdated: Date.now(),
+    elapsedTime: 0,
+    fps: 0
 }
 

@@ -1,3 +1,24 @@
+function tick() {
+    let now = Date.now()
+    let dt = now - GameManager.lastUpdated //dt = delta time
+    GameManager.lastUpdated = now
+    GameManager.fps = parseInt(1000 / dt)
+
+    $('#divFPS').text('FPS ' + GameManager.fps)
+
+    GameManager.bullets.update(dt)
+
+    setTimeout(tick, GameSettings.targetFPS)
+}
+
+function resetBullets() {
+    if (GameManager.bullets != undefined) {
+        GameManagere.bullets.reset()
+    } else {
+        GameManager.bullets = new BulletCollection(GameManager.player)
+    }
+}
+
 function resetPlayer() {
     if (GameManager.player === undefined) {
         let asset = GameManager.assets['playerShip1_blue']
@@ -13,9 +34,10 @@ function resetPlayer() {
     GameManager.player.reset()
 }
 
-function init() {
-    console.log('Main Game init()')
-    resetPlayer();
+function resetGame() {
+    resetPlayer()
+    resetBullets()
+    setTimeout(tick, GameSettings.targetFPS)
 }
 
 function processAsset(index) {
@@ -33,7 +55,7 @@ function processAsset(index) {
             processAsset(index)
         } else {
             console.log('Assets Done:', GameManager.assets)
-            init();
+            resetGame();
         }
     }
 }
