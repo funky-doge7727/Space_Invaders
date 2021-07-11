@@ -3,9 +3,7 @@ function tick() {
     let dt = now - GameManager.lastUpdated //dt = delta time
     GameManager.lastUpdated = now
     GameManager.fps = parseInt(1000 / dt)
-
-    $('#divFPS').text('FPS ' + GameManager.fps)
-
+    // $('#divFPS').text('FPS ' + GameManager.fps)
     GameManager.bullets.update(dt)
 
     setTimeout(tick, GameSettings.targetFPS)
@@ -66,15 +64,19 @@ $(function () {
     $(document).keydown(function (e) {
         switch (e.which) {
             case GameSettings.keyPress.up:
+            case GameSettings.keyPress.upW:
                 GameManager.player.move(0, -sensitivity)
                 break;
             case GameSettings.keyPress.down:
+            case GameSettings.keyPress.downS:
                 GameManager.player.move(0, sensitivity)
                 break;
             case GameSettings.keyPress.left:
+            case GameSettings.keyPress.leftA:
                 GameManager.player.move(-sensitivity, 0)
                 break;
             case GameSettings.keyPress.right:
+            case GameSettings.keyPress.rightD:
                 GameManager.player.move(sensitivity, 0)
                 break;
             case GameSettings.keyPress.space:

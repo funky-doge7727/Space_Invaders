@@ -11,14 +11,16 @@ const GameSettings = {
         right: 39,
         up: 38,
         down: 40,
+        upW: 87,
+        leftA: 65,
+        downS: 83,
+        rightD: 68,
         space: 32
     },
-    targetFPS: 1000 / 60,
-
+    targetFPS: 1000 / 60, // 60fps per second at 1000 / 60
     bulletSpeed: 700 / 1000, // bullet speed traverse the map vertically upwards at 0.7s
     bulletLife: 4000,  // bullet will traverse only for 4 seconds, then flies out of the boundaries and not exist (i.e. no life)
     bulletFireRate: 2000, // bullet will fire every 2 seconds from the player
-
     playAreaWidth: 720,
     playAreaHeight: 576,
     playAreaDiv: '#playArea',
