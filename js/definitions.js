@@ -1,9 +1,51 @@
-'use strict'
-
 const ImageFiles = [
     'playerShip1_blue',
-    'Lasers/laserBlue02_s'
+    'Lasers/laserBlue02_s',
+    'Enemies/enemyRed1'
 ]
+
+
+const WayPoints = {
+    LEFTTORIGHTSHALLOW: [{
+        rotation: 0,
+        x: 60,
+        y: -90,
+        dir_x: 0,
+        dir_y: 0
+    },
+    {
+        rotation: 0,
+        x: 60,
+        y: 128,
+        dir_x: 0,
+        dir_y: 1
+    },
+    {
+        rotation: 0,
+        x: 810,
+        y: 128,
+        dir_x: 1,
+        dir_y: 0
+    }
+    ],
+    STREAMFROMB180: [{
+        rotation: 0,
+        x: 180,
+        y: 620,
+        dir_x: 0,
+        dir_y: 0
+    },
+    {
+        rotation: 0,
+        x: 180,
+        y: -90,
+        dir_x: 0,
+        dir_y: -1
+    }
+    ]
+}
+
+let EnemySequences = []
 
 const GameSettings = {
     keyPress: {
@@ -17,13 +59,16 @@ const GameSettings = {
         rightD: 68,
         space: 32
     },
-    targetFPS: 1000 / 60, // 60fps per second at 1000 / 60
-    bulletSpeed: 700 / 1000, // bullet speed traverse the map vertically upwards at 0.7s
-    bulletLife: 4000,  // bullet will traverse only for 4 seconds, then flies out of the boundaries and not exist (i.e. no life)
-    bulletFireRate: 2000, // bullet will fire every 2 seconds from the player
+    targetFPS: 1000 / 60,
+
+    bulletSpeed: 700 / 1000,
+    bulletLife: 4000,
+    bulletFireRate: 2000,
+
     playAreaWidth: 720,
     playAreaHeight: 576,
     playAreaDiv: '#playArea',
+
     playerDivName: 'playerSprite',
     playerStart: {
         x: 360,
@@ -35,15 +80,67 @@ const GameSettings = {
         dead: 1,
         hitFlashing: 2
     },
-    playerMoveStep: 8
+    playerMoveStep: 8,
+    enemyState: {
+        ready: 1,
+        dead: 0,
+        movingToWaypoint: 2
+    },
+    pressSpaceDelay: 3000,
+    gamePhase: {
+        readyToplay: 1,
+        countdownToStart: 2,
+        playing: 3,
+        gameOver: 4
+    },
+    countDownGap: 700,
+    countDownValues: ['2','1','GO!']
 }
 
 let GameManager = {
-    assets: {},
+    assets : {},
     player: undefined,
-    bullet: undefined,
+    bullets: undefined,
+    phase: GameSettings.gamePhase.gameOver,
     lastUpdated: Date.now(),
     elapsedTime: 0,
     fps: 0
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
