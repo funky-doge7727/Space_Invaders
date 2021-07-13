@@ -63,12 +63,16 @@ const GameSettings = {
 
     bulletSpeed: 700 / 1000,
     bulletLife: 4000,
-    bulletFireRate: 200,
+    bulletFireRate: 10000,
     bulletTop: 10,
     
     playAreaWidth: 720,
     playAreaHeight: 576,
     playAreaDiv: '#playArea',
+
+    playerFlashOpacity: '0.5',
+    playerFlashTime: 300,
+    playerFlashes: 8,
 
     playerDivName: 'playerSprite',
     playerStart: {

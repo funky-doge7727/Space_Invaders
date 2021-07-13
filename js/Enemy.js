@@ -31,9 +31,20 @@ class Enemy extends Sprite {
         switch(this.state) {
             case GameSettings.enemyState.movingToWaypoint:
                 this.moveTowardPoint(dt)
+                this.checkPlayerCollision()
             break
         }
     }
+
+    checkPlayerCollision() {
+        if (this.containingBox.IntersectedBy(this.player.containingBox) === true) {
+            if (this.player.hit === false) {
+                this.player.hit = true
+                console.log('collision with player')
+            }
+        }
+    }
+    
 
     moveTowardPoint(dt) {
         let inc = dt * this.speed
@@ -155,7 +166,7 @@ class EnemyCollection {
         this.lastAdded = 0
         if (this.sequenceIndex == EnemySequences.length) {
             this.sequencesDone = true
-            console.log('seuences done')
+            console.log('sequences done')
         }
 	}
 }
