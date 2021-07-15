@@ -51,4 +51,9 @@ class Sprite {
         this.containingBox.update(this.position.x, this.position.y)
         this.draw();
     }
+
+    getCenterPoint() {
+        return new Point(this.position.x - this.anchorShift.x,
+            this.position.y - this.anchorShift.y)
+    }
 }

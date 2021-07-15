@@ -5,7 +5,7 @@ function tick() {
     GameManager.lastUpdated = now
     GameManager.fps = parseInt(1000 / dt)
 
-    $('#divFPS').text('FPS:' + GameManager.fps)
+    // $('#divFPS').text('FPS:' + GameManager.fps)
 
     GameManager.bullets.update(dt)
     GameManager.enemies.update(dt)
@@ -36,7 +36,15 @@ function showGameOver() {
     GameManager.phase = GameSettings.gameOver
     pauseStars()
     clearTimeouts()
-    writeMessage('Game Over')
+
+    if (GameManager.enemies.gameOver) {
+        playSound('completed')
+        writeMessage('You Won!')
+    } else {
+        playSound('gameover')
+        writeMessage('Game Over')
+    }
+
     setTimeout(function () {
         appendMessage('Press Space To Reset')
     }, GameSettings.pressSpaceDelay)
@@ -45,17 +53,24 @@ function showGameOver() {
 
 function endCountDown() {
     clearMessages()
+    playSound('go')
     GameManager.phase = GameSettings.gamePhase.playing
     GameManager.lastUpdated = Date.now()
     setTimeout(tick, GameSettings.targetFPS)
+}
+
+function setCountDownValue(val) {
+    playSound('countdown')
+    writeMessage(val)
 }
 
 function runCountDown() {
     createStars()
     GameManager.phase = GameSettings.gamePhase.countdownToStart
     writeMessage(3)
+    playSound('countdown')
     for (let i = 0; i < GameSettings.countDownValues.length; i++) {
-        setTimeout(writeMessage, GameSettings.countDownGap * (i + 1), GameSettings.countDownValues[i])
+        setTimeout(setCountDownValue, GameSettings.countDownGap * (i + 1), GameSettings.countDownValues[i])
     }
     setTimeout(endCountDown, (GameSettings.countDownValues.length + 1) * GameSettings.countDownGap)
 }
@@ -67,6 +82,10 @@ function writeMessage(text) {
 
 function appendMessage(text) {
     $('#messageContainer').append('<div class="message">' + text + '</div>')
+}
+
+function resetExplosions() {
+    GameManager.explosions = new Explosions('Explosion/explosion00_s')
 }
 
 function clearMessages() {
@@ -85,7 +104,7 @@ function resetEnemies() {
     if (GameManager.enemies != undefined) {
         GameManager.enemies.reset()
     } else {
-        GameManager.enemies = new EnemyCollection(GameManager.player, GameManager.bullets)
+        GameManager.enemies = new EnemyCollection(GameManager.player, GameManager.bullets, GameManager.explosions)
     }
 }
 
@@ -110,6 +129,7 @@ function resetGame() {
     console.log('Main Game init()')
     clearTimeouts()
     removeStars()
+    resetExplosions()
     resetplayer()
     resetBullets()
     resetEnemies()
@@ -146,6 +166,7 @@ function processAsset(index) {
 $(function () {
     console.log('ready..!')
     console.log("GameSettings:GameSettings", GameSettings)
+    initSounds()
     setUpSequences()
     $(document).keydown(function (e) {
         if (GameManager.phase == GameSettings.gamePhase.readyToplay) {
