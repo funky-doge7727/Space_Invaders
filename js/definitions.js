@@ -106,6 +106,7 @@ let GameManager = {
     assets : {},
     player: undefined,
     bullets: undefined,
+    timeouts: [],
     phase: GameSettings.gamePhase.gameOver,
     lastUpdated: Date.now(),
     elapsedTime: 0,

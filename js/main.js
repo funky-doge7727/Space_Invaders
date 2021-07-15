@@ -25,8 +25,17 @@ function tick() {
     }
 }
 
+function clearTimeouts() {
+    for (let i = 0; i < GameManager.timeouts.length; i++) {
+        clearTimeout(GameManager.timeouts[i])
+    }
+    GameManager.timeouts = []
+}
+
 function showGameOver() {
     GameManager.phase = GameSettings.gameOver
+    pauseStars()
+    clearTimeouts()
     writeMessage('Game Over')
     setTimeout(function () {
         appendMessage('Press Space To Reset')
@@ -42,6 +51,7 @@ function endCountDown() {
 }
 
 function runCountDown() {
+    createStars()
     GameManager.phase = GameSettings.gamePhase.countdownToStart
     writeMessage(3)
     for (let i = 0; i < GameSettings.countDownValues.length; i++) {
@@ -98,6 +108,8 @@ function resetplayer() {
 
 function resetGame() {
     console.log('Main Game init()')
+    clearTimeouts()
+    removeStars()
     resetplayer()
     resetBullets()
     resetEnemies()

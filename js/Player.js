@@ -52,8 +52,8 @@ class Player extends Sprite {
             this.state = GameSettings.playerState.hitFlashing
             this.lastFlash = 0
             this.numFlashes = 0
-            this.lives --
-            this.setLives
+            this.lives--
+            this.setLives()
             console.log('player hit!!')
             if (this.lives > 0) {
                 $('#' + this.divName).css({'opacity': GameSettings.playerFlashOpacity})
