@@ -174,23 +174,22 @@ $(function () {
                 runCountDown()
             }
         } else if (GameManager.phase == GameSettings.gamePhase.playing) {
-            const sensitivity = 2
             switch (e.which) {
                 case GameSettings.keyPress.up:
                 case GameSettings.keyPress.upW:
-                    GameManager.player.move(0, - sensitivity)
+                    GameManager.player.move(0, -GameSettings.keySensitivity)
                     break
                 case GameSettings.keyPress.down:
                 case GameSettings.keyPress.downS:
-                    GameManager.player.move(0, sensitivity)
+                    GameManager.player.move(0, GameSettings.keySensitivity)
                     break
                 case GameSettings.keyPress.left:
                 case GameSettings.keyPress.leftA:
-                    GameManager.player.move(- sensitivity, 0)
+                    GameManager.player.move(-GameSettings.keySensitivity, 0)
                     break
                 case GameSettings.keyPress.right:
                 case GameSettings.keyPress.rightD:
-                    GameManager.player.move(sensitivity, 0)
+                    GameManager.player.move(GameSettings.keySensitivity, 0)
                     break
             }
         } else if (GameManager.phase == GameSettings.gameOver) {

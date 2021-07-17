@@ -640,6 +640,7 @@ const GameSettings = {
         rightD: 68,
         space: 32
     },
+    keySensitivity: 3,
     targetFPS: 1000 / 60,
 
     bulletSpeed: 700 / 1000,
