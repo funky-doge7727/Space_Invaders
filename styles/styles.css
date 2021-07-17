@@ -46,7 +46,7 @@ body {
 
 #messageContainer {
     position: absolute;
-    top: 220px;
+    top: 160px;
     text-align: center;
     width: 100%;
     z-index: 40;

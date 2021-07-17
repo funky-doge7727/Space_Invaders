@@ -80,6 +80,10 @@ function writeMessage(text) {
     appendMessage(text)
 }
 
+function writeWelcomeMessage(text) {
+    appendMessage(text)
+}
+
 function appendMessage(text) {
     $('#messageContainer').append('<div class="message">' + text + '</div>')
 }
@@ -138,7 +142,10 @@ function resetGame() {
     GameManager.lastUpdated = Date.now()
     GameManager.elapsedTime = 0
 
-    writeMessage('Press Space To Start')
+    clearMessages()
+    writeWelcomeMessage('Welcome!')
+    writeWelcomeMessage('Start: Space')
+    writeWelcomeMessage('Move: Arrow / WASD')
 }
 
 
