@@ -697,7 +697,7 @@ const GameManager = {
     lastUpdated: Date.now(),
     elapsedTime: 0,
     fps: 0,
-    sample: false,
+    sample: true,
     sampleSequence: 15 // will not work if "sample" is false
 }
 

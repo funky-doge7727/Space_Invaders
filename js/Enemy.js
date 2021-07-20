@@ -37,8 +37,8 @@ class Enemy extends Sprite {
     }
 
     checkplayerCollision() {
-        if(this.containingBox.IntersectedBy(this.player.containingBox) == true) {
-            if (this.player.hit == false) {
+        if(this.containingBox.IntersectedBy(this.player.containingBox)) {
+            if (!this.player.hit) {
                 this.player.hit = true
                 console.log('collision with player')
             }
@@ -54,8 +54,8 @@ class Enemy extends Sprite {
             this.updatePosition( this.targetWayPoint.point.x,  this.targetWayPoint.point.y)
         }
 
-        if(this.position.equalToPoint(this.targetWayPoint.point.x, this.targetWayPoint.point.y) == true) {
-            if (this.targetWayPointNumber == this.lastWayPointIndex) {
+        if(this.position.equalToPoint(this.targetWayPoint.point.x, this.targetWayPoint.point.y)) {
+            if (this.targetWayPointNumber === this.lastWayPointIndex) {
                 this.killMe()
                 // console.log('reached end')
             } else {
@@ -117,22 +117,22 @@ class EnemyCollection {
     
     update(dt) {
 		this.lastAdded += dt
-		if (this.sequencesDone == false && 
+		if (!this.sequencesDone && 
             EnemySequences[this.sequenceIndex].delayBefore < this.lastAdded) {
 			this.addEnemy()
 		}
 
         for (let i = this.listEnemies.length - 1; i >= 0; i--) {
-            if (this.listEnemies[i].state == GameSettings.enemyState.dead) {
+            if (this.listEnemies[i].state === GameSettings.enemyState.dead) {
             	this.listEnemies.splice(i, 1)
-            } else if (this.listEnemies[i].state == GameSettings.enemyState.movingToWaypoint){
+            } else if (this.listEnemies[i].state === GameSettings.enemyState.movingToWaypoint){
                 let en = this.listEnemies[i]
 
                 for (let b = 0; b < this.bullets.listBullets.length; b++) {
                     let bu = this.bullets.listBullets[b]
-                    if (bu.dead == false &&
+                    if (!bu.dead &&
                         bu.position.y > GameSettings.bulletTop &&
-                        en.containingBox.IntersectedBy(bu.containingBox) == true) {
+                        en.containingBox.IntersectedBy(bu.containingBox)) {
                             bu.killMe()
                             en.lives--
                             if (en.lives <= 0) {
@@ -153,7 +153,7 @@ class EnemyCollection {
     }
     
     checkGameOver() {
-		if (this.listEnemies.length == 0 && this.sequencesDone == true) {
+		if (!this.listEnemies.length && this.sequencesDone) {
 			this.gameOver = true
             // console.log('game over')   
 		}
@@ -169,7 +169,7 @@ class EnemyCollection {
 		this.count++
 		this.sequenceIndex++
         this.lastAdded = 0
-        if (this.sequenceIndex == EnemySequences.length) {
+        if (this.sequenceIndex === EnemySequences.length) {
             this.sequencesDone = true
             // console.log('sequences done')
         }
@@ -181,7 +181,7 @@ function addEnemySequence(delayBefore, delayBetween, image, score,
     lives, speed, number, waypoints) {
     for (let i = 0; i < number; i++) {
         let delay = delayBetween
-        if(i == 0) {
+        if(!i) {
             delay = delayBefore
         }
         EnemySequences.push(
@@ -202,7 +202,7 @@ function createSequence(arr) {
     [delayBetween, image, number, attackBlock, score, lives, speed, delayBefore] = arr
     for (let i = 0; i < attackBlock.length; i++) {
         let delay = delayBetween
-        if (i == 0) {
+        if (!i) {
             delay = delayBefore
         }
         //console.log('adding sequence between:' , delayBetween, ' before: ' , delayBefore, ' delay:' , delay, ' block:' , attackBlock)
@@ -307,50 +307,22 @@ function setUpSequences(randomise = false, demo=false) {
 
 
 function shuffle(array) {
-    let currentIndex = array.length, randomIndex;
+    let currentIndex = array.length, randomIndex
     
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
     
         // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
+        randomIndex = Math.floor(Math.random() * currentIndex)
         currentIndex--;
     
         // And swap it with the current element.
         [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]]; 
+        array[randomIndex], array[currentIndex]]
     }
     
     return array;
     }
-
-// function setUpSequences(enemySequences, randomise = false) {
-//     enemySequences = [...enemySequences]
-//     if (randomise) {
-//         enemySequences = shuffle(enemySequences)
-//     } 
-//     console.log("test" + enemySequences)
-
-//     console.log("EnemySequences:" , EnemySequences)
-
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -142,7 +142,7 @@ function resetGame() {
 
     clearMessages()
     writeWelcomeMessage('Welcome!')
-    writeWelcomeMessage('Space: (Standard) Enter: (Random) Move: Arrow / WASD')
+    writeWelcomeMessage('Space: Standard Enter: Random Move: Arrow / WASD')
     // writeWelcomeMessage('Move: Arrow / WASD')
 }
 

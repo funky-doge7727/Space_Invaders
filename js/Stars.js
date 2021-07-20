@@ -15,7 +15,7 @@ function pauseStars() {
 function addStar(starClass) {
     let div = document.createElement('div')
     div.classList.add('star', starClass)
-    div.style.left = GetRandInt(0,720) + 'px'
+    div.style.left = GetRandInt(0,GameSettings.playAreaWidth) + 'px'
     $(GameSettings.playAreaDiv).append(div)
 }
 
