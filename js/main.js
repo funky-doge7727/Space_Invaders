@@ -118,7 +118,6 @@ function resetplayer() {
     if (GameManager.player == undefined) {
         console.log('resetplayer() making new')
         let asset = GameManager.assets['playerShip1_blue']
-
         GameManager.player = new Player('playerSprite', new Point(GameSettings.playerStart.x, GameSettings.playerStart.y), GameManager.assets['playerShip1_blue'], new Rect(40, 40, GameSettings.playAreaWidth - 80, GameSettings.playAreaHeight - 80))
         GameManager.player.addToBoard(true)
 
@@ -144,8 +143,8 @@ function resetGame() {
 
     clearMessages()
     writeWelcomeMessage('Welcome!')
-    writeWelcomeMessage('Start: Space')
-    writeWelcomeMessage('Move: Arrow / WASD')
+    writeWelcomeMessage('Space: (Standard) Enter: (Random) Move: Arrow / WASD')
+    // writeWelcomeMessage('Move: Arrow / WASD')
 }
 
 
@@ -174,10 +173,15 @@ $(function () {
     console.log('ready..!')
     console.log("GameSettings:GameSettings", GameSettings)
     initSounds()
-    setUpSequences()
+    
     $(document).keydown(function (e) {
+        // console.log(e.which)
         if (GameManager.phase == GameSettings.gamePhase.readyToplay) {
             if (e.which == GameSettings.keyPress.space) {
+                setUpSequences()
+                runCountDown()
+            } else if (e.which == GameSettings.keyPress.enter) {
+                setUpSequences(true)
                 runCountDown()
             }
         } else if (GameManager.phase == GameSettings.gamePhase.playing) {

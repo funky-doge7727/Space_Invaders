@@ -140,7 +140,7 @@ class EnemyCollection {
                                 this.player.incrementScore(en.score)
                                 en.killMe()
                                 let cp = en.getCenterPoint()
-                                this.explosions.createExplosion( new Point(cp.x, cp.y))
+                                this.explosions.createExplosion(new Point(cp.x, cp.y))
                             }
                     }
                 }
@@ -197,8 +197,9 @@ function addEnemySequence(delayBefore, delayBetween, image, score,
     }
 }
 
-function createSequence(delayBetween, image, number, attackBlock, score, lives, speed, delayBefore) {
-
+function createSequence(arr) {
+    let delayBetween, image, number, attackBlock, score, lives, speed, delayBefore;
+    [delayBetween, image, number, attackBlock, score, lives, speed, delayBefore] = arr
     for (let i = 0; i < attackBlock.length; i++) {
         let delay = delayBetween
         if (i == 0) {
@@ -209,25 +210,64 @@ function createSequence(delayBetween, image, number, attackBlock, score, lives, 
     }
 }
 
-function setUpSequences() {
-    createSequence(600,'Enemies/enemyGreen2', 1,  AttackBlocks.STREAMDOWN, 100, 1, enemySpeed.medium, 1000)
-    createSequence(600,'Enemies/enemyBlack4', 1,  AttackBlocks.STREAMDOWNMIXED, 100, 1, enemySpeed.medium, 2000)
-    createSequence(600,'Enemies/enemyBlue3', 1,  AttackBlocks.STREAMRETURNMIXED, 100, 1, enemySpeed.medium, 2000)
-    createSequence(600,'Enemies/enemyRed5', 1,  AttackBlocks.BADDIETYPE1, 500, 8, enemySpeed.slow, 500)
-    createSequence(600,'Enemies/enemyBlue3', 2,  AttackBlocks.STREAMUPMIXED, 100, 1, enemySpeed.fast, 7000)
-    createSequence(600,'Enemies/enemyBlack4', 1,  AttackBlocks.SIDEASSAULT1, 100, 1, enemySpeed.fast, 3000)
-    createSequence(600,'Enemies/enemyBlue3', 1,  AttackBlocks.SIDEASSAULT2, 100, 1, enemySpeed.fast, 3000)
-    createSequence(600,'Enemies/enemyGreen2', 2,  AttackBlocks.SIDEASSAULT3, 100, 1, enemySpeed.fast, 2000)
-    createSequence(600,'Enemies/enemyRed1', 2,  AttackBlocks.SIDEASSAULT4, 100, 1, enemySpeed.fast, 2000)
-    createSequence(600,'Enemies/enemyBlue3', 4,  AttackBlocks.SIDEASSAULT2, 100, 1, enemySpeed.medium, 2000)
-    createSequence(600,'Enemies/enemyGreen2', 4,  AttackBlocks.SIDEASSAULT3, 100, 1, enemySpeed.medium, 2000)
-    createSequence(600,'Enemies/enemyRed5', 1,  AttackBlocks.BADDIETYPE2, 500, 8, enemySpeed.slow, 500)
-    createSequence(600,'Enemies/enemyGreen2', 2,  AttackBlocks.STREAMDOWN, 100, 1, enemySpeed.fast, 2000)
-    createSequence(600,'Enemies/enemyBlack4', 2,  AttackBlocks.STREAMDOWNMIXED, 100, 1, enemySpeed.fast, 2000)
-    createSequence(600,'Enemies/enemyBlue3', 4,  AttackBlocks.STREAMRETURNMIXED, 100, 1, enemySpeed.medium, 2000)
-    console.log("EnemySequences:" , EnemySequences)
+function setUpSequences(randomise = false) {
+    arr = [[600,'Enemies/enemyGreen2', 1,  AttackBlocks.STREAMDOWN, 100, 1, enemySpeed.medium, 1000],
+    [600,'Enemies/enemyBlack4', 1,  AttackBlocks.STREAMDOWNMIXED, 100, 1, enemySpeed.medium, 2000], 
+    [600,'Enemies/enemyBlue3', 1,  AttackBlocks.STREAMRETURNMIXED, 100, 1, enemySpeed.medium, 2000],
+    [600,'Enemies/enemyRed5', 1,  AttackBlocks.BADDIETYPE1, 500, 8, enemySpeed.slow, 500],
+    [600,'Enemies/enemyBlue3', 2,  AttackBlocks.STREAMUPMIXED, 100, 1, enemySpeed.fast, 7000],
+    [600,'Enemies/enemyBlack4', 1,  AttackBlocks.SIDEASSAULT1, 100, 1, enemySpeed.fast, 3000],
+    [600,'Enemies/enemyBlue3', 1,  AttackBlocks.SIDEASSAULT2, 100, 1, enemySpeed.fast, 3000],
+    [600,'Enemies/enemyGreen2', 2,  AttackBlocks.SIDEASSAULT3, 100, 1, enemySpeed.fast, 2000],
+    [600,'Enemies/enemyRed1', 2,  AttackBlocks.SIDEASSAULT4, 100, 1, enemySpeed.fast, 2000],
+    [600,'Enemies/enemyBlue3', 4,  AttackBlocks.SIDEASSAULT2, 100, 1, enemySpeed.medium, 2000],
+    [600,'Enemies/enemyGreen2', 4,  AttackBlocks.SIDEASSAULT3, 100, 1, enemySpeed.medium, 2000],
+    [600,'Enemies/enemyRed5', 1,  AttackBlocks.BADDIETYPE2, 500, 8, enemySpeed.slow, 500],
+    [600,'Enemies/enemyGreen2', 2,  AttackBlocks.STREAMDOWN, 100, 1, enemySpeed.fast, 2000],
+    [600,'Enemies/enemyBlack4', 2,  AttackBlocks.STREAMDOWNMIXED, 100, 1, enemySpeed.fast, 2000],
+    [600,'Enemies/enemyBlue3', 4,  AttackBlocks.STREAMRETURNMIXED, 100, 1, enemySpeed.medium, 2000]]
 
+    if (randomise) {
+        shuffle(arr)
+    }
+
+    for (const element of arr) {
+        createSequence(element)
+    }
+    // console.log("EnemySequences:" , EnemySequences)
 }
+
+
+function shuffle(array) {
+    let currentIndex = array.length, randomIndex;
+    
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+    
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+    
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]]; 
+    }
+    
+    return array;
+    }
+
+// function setUpSequences(enemySequences, randomise = false) {
+//     enemySequences = [...enemySequences]
+//     if (randomise) {
+//         enemySequences = shuffle(enemySequences)
+//     } 
+//     console.log("test" + enemySequences)
+
+//     console.log("EnemySequences:" , EnemySequences)
+
+// }
+
+
 
 
 

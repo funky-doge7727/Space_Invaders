@@ -638,7 +638,8 @@ const GameSettings = {
         leftA: 65,
         downS: 83,
         rightD: 68,
-        space: 32
+        space: 32,
+        enter: 13
     },
     keySensitivity: 3,
     targetFPS: 1000 / 60,
@@ -682,7 +683,7 @@ const GameSettings = {
     },
     countDownGap: 700,
     countDownValues: ['2','1','GO!'],
-    explosionTimeout: 1000
+    explosionTimeout: 500
 }
 
 let GameManager = {
