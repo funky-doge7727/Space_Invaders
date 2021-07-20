@@ -55,7 +55,7 @@ class Player extends Sprite {
             this.lives--
             this.setLives()
             playSound('loselife')
-            console.log('player hit!!')
+            // console.log('player hit!!')
             if (this.lives > 0) {
                 $('#' + this.divName).css({'opacity': GameSettings.playerFlashOpacity})
             }

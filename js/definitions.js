@@ -686,7 +686,7 @@ const GameSettings = {
     explosionTimeout: 500
 }
 
-let GameManager = {
+const GameManager = {
     assets : {},
     player: undefined,
     bullets: undefined,
@@ -696,7 +696,9 @@ let GameManager = {
     phase: GameSettings.gamePhase.gameOver,
     lastUpdated: Date.now(),
     elapsedTime: 0,
-    fps: 0
+    fps: 0,
+    sample: false,
+    sampleSequence: 15 // will not work if "sample" is false
 }
 
 

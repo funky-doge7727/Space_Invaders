@@ -114,22 +114,21 @@ function resetEnemies() {
 
 function resetplayer() {
     console.log('resetplayer()')
-    console.log('resetplayer() GameManager.player:', GameManager.player)
+    // console.log('resetplayer() GameManager.player:', GameManager.player)
     if (GameManager.player == undefined) {
-        console.log('resetplayer() making new')
+        // console.log('resetplayer() making new')
         let asset = GameManager.assets['playerShip1_blue']
         GameManager.player = new Player('playerSprite', new Point(GameSettings.playerStart.x, GameSettings.playerStart.y), GameManager.assets['playerShip1_blue'], new Rect(40, 40, GameSettings.playAreaWidth - 80, GameSettings.playAreaHeight - 80))
         GameManager.player.addToBoard(true)
-
-        console.log('resetplayer() added new GameManager.player:', GameManager.player)
+        // console.log('resetplayer() added new GameManager.player:', GameManager.player)
     }
 
-    console.log('resetplayer() GameManager.player:', GameManager.player)
+    // console.log('resetplayer() GameManager.player:', GameManager.player)
     GameManager.player.reset()
 }
 
 function resetGame() {
-    console.log('Main Game init()')
+    // console.log('Main Game init()')
     clearTimeouts()
     removeStars()
     resetExplosions()
@@ -178,10 +177,10 @@ $(function () {
         // console.log(e.which)
         if (GameManager.phase == GameSettings.gamePhase.readyToplay) {
             if (e.which == GameSettings.keyPress.space) {
-                setUpSequences()
+                setUpSequences(false,GameManager.sample)
                 runCountDown()
             } else if (e.which == GameSettings.keyPress.enter) {
-                setUpSequences(true)
+                setUpSequences(true,GameManager.sample)
                 runCountDown()
             }
         } else if (GameManager.phase == GameSettings.gamePhase.playing) {

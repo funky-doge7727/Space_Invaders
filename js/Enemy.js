@@ -57,7 +57,7 @@ class Enemy extends Sprite {
         if(this.position.equalToPoint(this.targetWayPoint.point.x, this.targetWayPoint.point.y) == true) {
             if (this.targetWayPointNumber == this.lastWayPointIndex) {
                 this.killMe()
-                console.log('reached end')
+                // console.log('reached end')
             } else {
                 this.setNextWayPoint()
             }
@@ -155,7 +155,7 @@ class EnemyCollection {
     checkGameOver() {
 		if (this.listEnemies.length == 0 && this.sequencesDone == true) {
 			this.gameOver = true
-            console.log('game over')   
+            // console.log('game over')   
 		}
     }
     
@@ -171,7 +171,7 @@ class EnemyCollection {
         this.lastAdded = 0
         if (this.sequenceIndex == EnemySequences.length) {
             this.sequencesDone = true
-            console.log('seuences done')
+            // console.log('sequences done')
         }
 	}
 }
@@ -210,7 +210,7 @@ function createSequence(arr) {
     }
 }
 
-function setUpSequences(randomise = false) {
+function setUpSequences(randomise = false, demo=false) {
     arr = [[600,'Enemies/enemyGreen2', 1,  AttackBlocks.STREAMDOWN, 100, 1, enemySpeed.medium, 1000],
     [600,'Enemies/enemyBlack4', 1,  AttackBlocks.STREAMDOWNMIXED, 100, 1, enemySpeed.medium, 2000], 
     [600,'Enemies/enemyBlue3', 1,  AttackBlocks.STREAMRETURNMIXED, 100, 1, enemySpeed.medium, 2000],
@@ -295,6 +295,10 @@ function setUpSequences(randomise = false) {
         shuffle(arr)
     }
 
+    if (demo) {
+        arr = arr.slice(0,GameManager.sampleSequence)
+    }
+    // console.log(arr.length)
     for (const element of arr) {
         createSequence(element)
     }
