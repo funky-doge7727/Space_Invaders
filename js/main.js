@@ -171,6 +171,9 @@ function processAsset(index) {
 $(function () {
     console.log('ready..!')
     console.log("GameSettings:GameSettings", GameSettings)
+    if (GameManager.sample) {
+        console.log('Demo Mode.')
+    }
     initSounds()
     
     $(document).keydown(function (e) {
