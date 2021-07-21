@@ -113,7 +113,7 @@ function resetEnemies() {
 }
 
 function resetplayer() {
-    console.log('resetplayer()')
+    // console.log('resetplayer()')
     // console.log('resetplayer() GameManager.player:', GameManager.player)
     if (GameManager.player == undefined) {
         // console.log('resetplayer() making new')
@@ -161,7 +161,7 @@ function processAsset(index) {
         if (index < ImageFiles.length) {
             processAsset(index)
         } else {
-            console.log('Assets Done:', GameManager.assets)
+            // console.log('Assets Done:', GameManager.assets)
             resetGame()
         }
     }
@@ -169,8 +169,8 @@ function processAsset(index) {
 
 
 $(function () {
-    console.log('ready..!')
-    console.log("GameSettings:GameSettings", GameSettings)
+    // console.log('ready..!')
+    // console.log("GameSettings:GameSettings", GameSettings)
     if (GameManager.sample) {
         console.log('Demo Mode.')
     }

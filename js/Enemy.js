@@ -287,7 +287,8 @@ function setUpSequences(randomise = false, demo=false) {
     [600,'Enemies/enemyGreen2', 2,  AttackBlocks.STREAMDOWN, 100, 1, enemySpeed.fast, 2000],
     [600,'Enemies/enemyBlack4', 2,  AttackBlocks.STREAMDOWNMIXED, 100, 1, enemySpeed.fast, 2000],
     [600,'Enemies/enemyBlue3', 4,  AttackBlocks.STREAMRETURNMIXED, 100, 1, enemySpeed.medium, 2000],
-    [600,'Enemies/enemyRed5', 1,  AttackBlocks.BADDIETYPE2, 1000, 8, enemySpeed.slow, 500]]
+    [600,'Enemies/enemyRed5', 1,  AttackBlocks.BADDIETYPE2, 1000, 8, enemySpeed.slow, 500],
+    [600,'Enemies/enemyGreen2', 1,  AttackBlocks.STREAMDOWN, 100, 1, enemySpeed.medium, 1000]]
 
     arr = arr.concat(arr)
 
