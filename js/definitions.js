@@ -626,7 +626,7 @@ const AttackBlocks = {
     ]
 }
 
-let EnemySequences = []
+const EnemySequences = []
 
 const GameSettings = {
     keyPress: {
