@@ -1,4 +1,4 @@
-This is a dynamic space shooter game that utilises HTML and CSS , where enemies are appearing from different sides of the play area.
+This is a dynamic space shooter game that utilises HTML, CSS and JS , where enemies are appearing from different sides of the play area.
 
 There are two modes of gameplay - standard and random. Standard gameplay features a fixed set of enemy sequences, while random gameplay features randomised (i.e. more dynamic) enemy sequences.
 
